@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Assignments',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        ),
         useMaterial3: true,
       ),
       home: const HomePage(title: 'Profile Card Page'),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignments/models/profile_model.dart';
+import 'package:flutter_assignments/views/details_page.dart';
 
 class ProfileCardWidget extends StatelessWidget {
   const ProfileCardWidget({super.key});
@@ -33,16 +35,27 @@ class ProfileCardWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                const snackBar = SnackBar(content: Text('Thanks for following'));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              onPressed: () async {
+                Profile profile = Profile(
+                  imageUrl: 'assets/profilePic.png', 
+                  name: 'Abhay Shankur', 
+                  email: "abhayshankur1@gmail.com", 
+                  contact: "8600679220", 
+                  role: "Intern", 
+                  expertise: 'Flutter Developer | ROR Developer'
+                );
+                final res = await Navigator.push(context, MaterialPageRoute(builder: (_) => DetailsPage(details: profile)));
+                if(context.mounted && res is bool && res){
+                  const snackBar = SnackBar(content: Text('Thanks for following'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)),
               ),
-              child: const Text('Follow', style: TextStyle(color: Colors.white),),
+              child: const Text('View', style: TextStyle(color: Colors.white),),
             ),
           ],
         ),
