@@ -3,7 +3,7 @@ import 'package:flutter_assignments/views/widgets/profile_card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
+  
   @override
   State<HomePage> createState() => _HomePageState();
 }
