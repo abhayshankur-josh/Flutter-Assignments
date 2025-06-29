@@ -1,4 +1,4 @@
-class Profile {
+class Profile{
   final String imageUrl;
   final String name;
   final String email;
