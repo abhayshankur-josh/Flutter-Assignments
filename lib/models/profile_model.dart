@@ -2,17 +2,17 @@ class Profile{
   final String imageUrl;
   final String name;
   final String email;
-  final String contact;
-  final String role;
-  final String expertise;
+  final String? contact;
+  final String? role;
+  final String? expertise;
 
-  Profile({
+  const Profile({
     required this.imageUrl,
     required this.name,
     required this.email,
-    required this.contact,
-    required this.role,
-    required this.expertise,
+    this.contact,
+    this.role,
+    this.expertise,
   });
 
 }

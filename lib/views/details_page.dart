@@ -20,15 +20,17 @@ class DetailsPage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage(details.imageUrl),
+              backgroundImage: details.imageUrl.toString().startsWith("assets")
+                ? AssetImage(details.imageUrl) as ImageProvider<Object>
+                : NetworkImage(details.imageUrl) as ImageProvider<Object>,
             ),
             const SizedBox(height: 20),
             Text(details.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             infoRow("Email", details.email),
-            infoRow("Contact", details.contact),
-            infoRow("Role", details.role),
-            infoRow("Expertise", details.expertise),
+            infoRow("Contact", details.contact ?? "No Contact Available"),
+            infoRow("Role", details.role ?? "No Role Available"),
+            infoRow("Expertise", details.expertise ?? "No Expertise Available"),
             const Spacer(),
             SizedBox(
               width: double.infinity,

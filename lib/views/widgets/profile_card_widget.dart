@@ -3,7 +3,17 @@ import 'package:flutter_assignments/models/profile_model.dart';
 import 'package:flutter_assignments/views/details_page.dart';
 
 class ProfileCardWidget extends StatelessWidget {
-  const ProfileCardWidget({super.key});
+  final Profile profile;
+
+  const ProfileCardWidget({
+    super.key,
+    this.profile = const Profile(
+      name: 'Abhay Shankur',
+      email: 'abhayshankur@example.com',
+      imageUrl: 'assets/profilePic.png',
+      expertise: 'Flutter Developer',
+    ),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,34 +26,26 @@ class ProfileCardWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage(
-                'assets/profilePic.png',
-              ),
+              backgroundImage: profile.imageUrl.toString().startsWith("assets")
+                ? AssetImage(profile.imageUrl) as ImageProvider<Object>
+                : NetworkImage(profile.imageUrl) as ImageProvider<Object>,
             ),
             const SizedBox(height: 12),
-            const Text(
-              'Abhay Shankur',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              profile.name,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
-              'Flutter Developer | ROR Developer',
+              profile.expertise ?? profile.email,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: Colors.grey[700]),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
-                Profile profile = Profile(
-                  imageUrl: 'assets/profilePic.png', 
-                  name: 'Abhay Shankur', 
-                  email: "abhayshankur1@gmail.com", 
-                  contact: "8600679220", 
-                  role: "Intern", 
-                  expertise: 'Flutter Developer | ROR Developer'
-                );
                 final res = await Navigator.push(context, MaterialPageRoute(builder: (_) => DetailsPage(details: profile)));
                 if(context.mounted && res is bool && res){
                   const snackBar = SnackBar(content: Text('Thanks for following'));
